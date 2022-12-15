@@ -126,10 +126,10 @@ jwtExpiryTime: 604800
 # Leave blank to autogenerate
 jwtSecret:
 
-PdfDeletionTime:
+pdfDeletionTime:
 
 # Leave blank to autogenerate
-SecretKey:
+secretKey:
 
 S3StorageSecretName:
 # Keys referenced from secret
