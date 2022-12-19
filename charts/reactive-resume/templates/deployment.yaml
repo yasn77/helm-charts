@@ -36,17 +36,17 @@ spec:
           env:
             {{- include "reactive-resume.serverEnv" . | nindent 12 }}
           ports:
-            - name: http
+            - name: server-http
               containerPort: 3100
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: server-http
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: server-http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-client
@@ -57,17 +57,17 @@ spec:
           env:
             {{- include "reactive-resume.clientEnv" . | nindent 12 }}
           ports:
-            - name: http
+            - name: frontend-http
               containerPort: 3000
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: frontend-http
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: frontend-http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.sideCarContainers }}
