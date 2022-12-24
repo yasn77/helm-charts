@@ -3,6 +3,23 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: 2022.12.1
+    created: "2022-12-24T17:59:05.911058306Z"
+    description: Create Cloudflared Tunnels and configure ingress routes
+    digest: 479f2a710db5583c3c1f51da3deff8fd1673d398f5bfa53de35fa9cbe4f68905
+    home: https://github.com/yasn77/helm-charts
+    icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
+    keywords:
+    - vpn
+    - tunnel
+    kubeVersion: '>=1.18'
+    name: cloudflared
+    sources:
+    - https://github.com/yasn77/helm-charts/cloudflared
+    urls:
+    - https://github.com/yasn77/helm-charts/releases/download/cloudflared-0.4.1/cloudflared-0.4.1.tgz
+    version: 0.4.1
+  - apiVersion: v2
+    appVersion: 2022.12.1
     created: "2022-12-24T15:40:12.338339954Z"
     description: Create Cloudflared Tunnels and configure ingress routes
     digest: 0f3f63090928594ef9f9c7930ce10a9756a203f0276a53cdc2bebf2262956bec
@@ -29,4 +46,4 @@ entries:
     urls:
     - https://github.com/yasn77/helm-charts/releases/download/reactive-resume-0.1.0/reactive-resume-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-24T15:40:12.338351154Z"
+generated: "2022-12-24T17:59:05.911076606Z"
