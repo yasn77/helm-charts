@@ -1,0 +1,125 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "cloudflared.labels" . | nindent 4 }}
+  name: {{ template "cloudflared.fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "cloudflared.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        {{- include "cloudflared.selectorLabels" . | nindent 8 }}
+      annotations:
+        sha256checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - {{ include "cloudflared.fullname" . }}
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - {{ .Release.Name }}
+            topologyKey: "kubernetes.io/hostname"
+      serviceAccountName: {{ template "cloudflared.serviceAccountName" . }}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65534
+      {{- if and (not .Values.useExistingTunnel.enabled) (not .Values.useQuickTunnel)}}
+      initContainers:
+      - name: create-tunnel
+        image: {{ .Values.initImage.registry }}/{{ .Values.initImage.name }}:{{ .Values.initImage.tag }}
+        imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+        {{- include "create-tunnel-command" . | nindent 8 }}
+        env:
+          {{- include "create_tunnel.envs" . | nindent 10 }}
+          {{- include "envs" . | nindent 10 }}
+        securityContext:
+          readOnlyRootFilesystem: true
+        volumeMounts:
+          - name: credentials
+            mountPath: "/credentials"
+          - name: config
+            mountPath: "/etc/cloudflared"
+      {{- end }}
+      containers:
+      - image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        name: cloudflared
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        env:
+          - name: TUNNEL_METRICS
+            value: "0.0.0.0:42617"
+        {{- if not .Values.useQuickTunnel}}
+          {{- include "envs" . | nindent 10 }}
+        {{- end }}
+        args:
+        - tunnel
+        - '--no-autoupdate'
+
+        {{- if not .Values.useQuickTunnel }}
+        - run
+        {{- if .Values.useExistingTunnel.enabled }}
+        - {{ .Values.useExistingTunnel.tunnel }}
+        {{- else }}
+        - {{ template "cloudflared.fullname" . }}
+        {{- end }}
+        {{- end }}
+        securityContext:
+          readOnlyRootFilesystem: true
+        volumeMounts:
+          - name: config
+            mountPath: "/etc/cloudflared"
+          - name: credentials
+            mountPath: "/credentials"
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 42617
+            scheme: HTTP
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 42617
+            scheme: HTTP
+        startupProbe:
+          httpGet:
+            path: /ready
+            port: 42617
+            scheme: HTTP
+          failureThreshold: 60
+          periodSeconds: 10
+      volumes:
+        - name: config
+          configMap:
+            name:  {{ template "cloudflared.fullname" . }}
+        - name: credentials
+          {{- if .Values.useExistingTunnel.enabled }}
+          secret:
+            secretName: "{{ .Values.useExistingTunnel.credentialsSecretName }}"
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+...
