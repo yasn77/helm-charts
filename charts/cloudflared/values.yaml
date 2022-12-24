@@ -1,0 +1,42 @@
+namespace: kube-system
+
+replicas: 2
+
+initImage:
+  registry: registry.gitlab.com/gitlab-ci-utils/curl-jq
+  name: gitlab-ci-utils/curl-jq
+  tag: 1.1.0
+  pullPolicy: IfNotPresent
+
+image:
+  registry: registry.hub.docker.com
+  name: cloudflare/cloudflared
+  tag: ""
+  pullPolicy: IfNotPresent
+
+accountEmail: ""
+accountId: ""
+apiKey: ""
+apiKeySecretName: ""
+tunnelSecretBase64: ""
+tunnelSecretName: ""
+
+useExistingTunnel:
+  enabled: false
+  credentialsSecretName: ""
+  tunnel: ""
+
+useQuickTunnel: false
+
+config:
+  no-tls-verify: false
+  loglevel: "info"
+  transport-loglevel: "info"
+
+resources:
+  requests:
+    memory: "100Mi"
+    cpu: "100m"
+  limits:
+    memory: "100Mi"
+    cpu: "100m"

@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: 2022.12.1
+description: Create Cloudflared Tunnels and configure ingress routes
+keywords:
+  - vpn
+  - tunnel
+engine: gotpl
+home: https://github.com/yasn77/helm-charts
+icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
+name: cloudflared
+sources:
+  - https://github.com/yasn77/helm-charts/cloudflared
+version: 0.4.0
+kubeVersion: ">=1.18"
