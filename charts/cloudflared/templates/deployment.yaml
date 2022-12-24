@@ -64,7 +64,7 @@ spec:
             mountPath: "/etc/cloudflared"
       {{- end }}
       containers:
-      - image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      - image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}
         name: cloudflared
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
