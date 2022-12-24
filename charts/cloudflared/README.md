@@ -99,6 +99,7 @@ Kubernetes: `>=1.18`
 | tunnelSecretBase64 | string | `""` | The tunnel secret to use (Base64 encoded) |
 | tunnelSecretName | string | `""` | Provide a secret that contains the Tunnel secret |
 | useExistingTunnel | object | `{"credentialsSecretName":"","enabled":false,"tunnel":""}` | Whether to use an existing tunnel or create new one |
+| usePsp | bool | `false` |  |
 | useQuickTunnel | bool | `false` | Use Cloudflare quick tunnel feature (https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/do-more-with-tunnels/trycloudflare/) |
 
 ### Examples

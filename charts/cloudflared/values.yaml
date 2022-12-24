@@ -14,6 +14,8 @@ image:
   tag: ""
   pullPolicy: IfNotPresent
 
+usePsp: false
+
 # -- Cloudflare Account Email
 accountEmail: ""
 # -- Clouflare Account ID to use

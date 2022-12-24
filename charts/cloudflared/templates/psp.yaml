@@ -1,3 +1,4 @@
+{{- if .Values.usePsp }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -57,3 +58,4 @@ rules:
   - use
   resourceNames:
   - "{{ template "cloudflared.fullname" . }}"
+{{- end }}
