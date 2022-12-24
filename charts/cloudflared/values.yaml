@@ -14,20 +14,29 @@ image:
   tag: ""
   pullPolicy: IfNotPresent
 
+# -- Cloudflare Account Email
 accountEmail: ""
+# -- Clouflare Account ID to use
 accountId: ""
+# -- Cloudflare API token (https://dash.cloudflare.com/profile/api-tokens)
 apiKey: ""
+# -- Provide a secret that contains the API token
 apiKeySecretName: ""
+# -- The tunnel secret to use (Base64 encoded)
 tunnelSecretBase64: ""
+# -- Provide a secret that contains the Tunnel secret
 tunnelSecretName: ""
 
+# -- Whether to use an existing tunnel or create new one
 useExistingTunnel:
   enabled: false
   credentialsSecretName: ""
   tunnel: ""
 
+# -- Use Cloudflare quick tunnel feature (https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/do-more-with-tunnels/trycloudflare/)
 useQuickTunnel: false
 
+# -- Cloudflare config, this gets created in to a ConfigMap. Complete config is required. Default values should be fine
 config:
   no-tls-verify: false
   loglevel: "info"
