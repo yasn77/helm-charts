@@ -132,11 +132,11 @@ EmailConfigSecretName:
 # - MAIL_USERNAME
 # - MAIL_PASSWORD
 
-jwtExpiryTime: 604800
+jwtExpiryTime: "604800"
 # Leave blank to autogenerate
 jwtSecret:
 
-pdfDeletionTime: 345600000
+pdfDeletionTime: "345600000"
 
 # Leave blank to autogenerate
 secretKey:
