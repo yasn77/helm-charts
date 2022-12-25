@@ -182,7 +182,7 @@ Generate Server environment variables
 {{- if .Values.S3StorageSecretName }}
 - name: "STORAGE_BUCKET"
   valueFrom:
-    secretKeyRef:``
+    secretKeyRef:
       name: "{{ .Values.S3StorageSecretName }}"
       key: "STORAGE_BUCKET"
 - name: "STORAGE_REGION"
