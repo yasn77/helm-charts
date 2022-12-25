@@ -136,7 +136,7 @@ jwtExpiryTime: 604800
 # Leave blank to autogenerate
 jwtSecret:
 
-pdfDeletionTime:
+pdfDeletionTime: 345600000
 
 # Leave blank to autogenerate
 secretKey:
