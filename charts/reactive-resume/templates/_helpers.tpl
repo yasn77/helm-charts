@@ -136,7 +136,7 @@ Generate Server environment variables
       key: "JWT_SECRET"
 {{- end }}
 - name: "JWT_EXPIRY_TIME"
-  value: "{{ .Values.jwtExpiryTime }}"
+  value: {{ .Values.jwtExpiryTime | int | quote }}
 {{- if .Values.GoogleAuthSecretName }}
 - name: "GOOGLE_CLIENT_SECRET"
   valueFrom:
@@ -215,6 +215,6 @@ Generate Server environment variables
 {{- end }}
 {{- if .Values.pdfDeletionTime }}
 - name: "PDF_DELETION_TIME"
-  value: "{{ .Values.pdfDeletionTime }}"
+  value: {{ .Values.pdfDeletionTime | int | quote}}
 {{- end }}
 {{- end }}
