@@ -87,6 +87,8 @@ Generate Client environment variables
       name: {{ .Values.GoogleAuthSecretName }}
       key: "PUBLIC_GOOGLE_CLIENT_ID"
 {{- end }}
+- name: PUBLIC_FLAG_DISABLE_SIGNUPS
+  value: {{ .Values.disableSignups }}
 {{- end }}
 
 {{/*

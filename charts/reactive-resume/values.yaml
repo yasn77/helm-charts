@@ -104,6 +104,8 @@ postgresql:
       # storageClass: ""
       # size: 8Gi
 
+disableSignups: false
+
 # Ignored if postgresql.enabled is true
 postgresHost: postgres
 postgresPort: 5432
