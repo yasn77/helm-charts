@@ -147,36 +147,36 @@ Generate Server environment variables
       name: "{{ .Values.GoogleAuthSecretName }}"
       key: "GOOGLE_API_KEY"
 {{- end }}
-{{- if .Values.S3StorageSecretName }}
+{{- if .Values.EmailConfigSecretName }}
 - name: "MAIL_FROM_NAME"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_FROM_NAME"
 - name: "MAIL_FROM_EMAIL"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_FROM_EMAIL"
 - name: "MAIL_HOST"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_HOST"
 - name: "MAIL_PORT"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_PORT"
 - name: "MAIL_USERNAME"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_USERNAME"
 - name: "MAIL_PASSWORD"
   valueFrom:
     secretKeyRef:
-      name: "{{ .Values.S3StorageSecretName }}"
+      name: "{{ .Values.EmailConfigSecretName }}"
       key: "MAIL_PASSWORD"
 {{- end }}
 {{- if .Values.S3StorageSecretName }}
