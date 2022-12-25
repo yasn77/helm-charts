@@ -55,6 +55,16 @@ entries:
   reactive-resume:
   - apiVersion: v2
     appVersion: 3.6.16
+    created: "2022-12-25T14:37:13.221744997Z"
+    description: Reactive Resume is a free and open source resume builder
+    digest: c5cec2bf13d876d2d20ecd88f043f098b2e3bcd6c6c514f351bbe682c905769f
+    name: reactive-resume
+    type: application
+    urls:
+    - https://github.com/yasn77/helm-charts/releases/download/reactive-resume-0.1.4/reactive-resume-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 3.6.16
     created: "2022-12-25T13:48:33.528020331Z"
     description: Reactive Resume is a free and open source resume builder
     digest: d6fa70cde46a8eb0440066b3222877e981116fa2187d334c85be773f832e83b9
@@ -93,4 +103,4 @@ entries:
     urls:
     - https://github.com/yasn77/helm-charts/releases/download/reactive-resume-0.1.0/reactive-resume-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-25T13:48:33.528130332Z"
+generated: "2022-12-25T14:37:13.221772198Z"
