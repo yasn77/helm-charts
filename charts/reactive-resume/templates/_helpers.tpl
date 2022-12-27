@@ -77,9 +77,9 @@ Generate Client environment variables
 {{- toYaml .Values.env }}
 {{- end -}}
 - name: "PUBLIC_URL"
-  value: {{ .Values.publicUrl }}
+  value: {{ .Values.publicUrl | quote }}
 - name: "PUBLIC_SERVER_URL"
-  value: {{ .Values.publicServerUrl }}
+  value: {{ .Values.publicServerUrl | quote }}
 {{- if .Values.GoogleAuthSecretName }}
 - name: "PUBLIC_GOOGLE_CLIENT_ID"
   valueFrom:
@@ -88,7 +88,7 @@ Generate Client environment variables
       key: "PUBLIC_GOOGLE_CLIENT_ID"
 {{- end }}
 - name: PUBLIC_FLAG_DISABLE_SIGNUPS
-  value: {{ .Values.disableSignups }}
+  value: {{ .Values.disableSignups | quote }}
 {{- end }}
 
 {{/*
@@ -97,13 +97,13 @@ Generate Server environment variables
 {{- define "reactive-resume.serverEnv" -}}
 {{- include "reactive-resume.clientEnv" . }}
 - name: "POSTGRES_HOST"
-  value: "{{ .Values.postgresHost }}"
+  value: {{ .Values.postgresHost | quote }}
 - name: "POSTGRES_PORT"
-  value: "{{ .Values.postgresPort }}"
+  value: {{ .Values.postgresPort | quote }}
 - name: "POSTGRES_DB"
-  value: "{{ .Values.postgresDatabase }}"
+  value: {{ .Values.postgresDatabase | quote }}
 - name: "POSTGRES_USER"
-  value: "{{ .Values.postgresUser }}"
+  value: {{ .Values.postgresUser | quote }}
 - name: "POSTGRES_PASSWORD"
 {{- if .Values.postgresPasswordSecretName }}
   valueFrom:
@@ -111,15 +111,15 @@ Generate Server environment variables
       name: "{{ .Values.postgresPasswordSecretName }}"
       key: "POSTGRES_PASSWORD"
 {{- else }}
-  value: "{{ .Values.postgresPassword }}"
+  value: {{ .Values.postgresPassword | quote }}
 {{- end }}
 {{- if .Values.postgresSslCert }}
 - name: "POSTGRES_SSL_CERT"
-  value: "{{ .Values.postgresSslCert }}"
+  value: {{ .Values.postgresSslCert | quote }}
 {{- end }}
 - name: "SECRET_KEY"
 {{- if .Values.secretKey }}
-  value: "{{ .Values.secretKey }}"
+  value: {{ .Values.secretKey | quote }}
 {{- else }}
   valueFrom:
     secretKeyRef:
@@ -128,7 +128,7 @@ Generate Server environment variables
 {{- end }}
 - name: "JWT_SECRET"
 {{- if .Values.jwtSecret }}
-  value: "{{ .Values.jwtSecret }}"
+  value: {{ .Values.jwtSecret | quote }}
 {{- else }}
   valueFrom:
     secretKeyRef:
