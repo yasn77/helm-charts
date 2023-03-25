@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 2022.12.1
+appVersion: 2023.3.1
 description: Create Cloudflared Tunnels and configure ingress routes
 keywords:
   - vpn
